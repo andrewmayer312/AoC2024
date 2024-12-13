@@ -1,4 +1,5 @@
 def processCompletedArray(in_array):
+    print(in_array)
     in_array = in_array[3:]
     in_array.remove('(')
     in_array.remove(')')
@@ -39,7 +40,6 @@ def main():
             if not in_char:
                 print("End of file")
                 break
-            
             #if char is m, check that next char is u
             if in_char == 'm' and not operation_array:
                 operation_array.append(in_char)
@@ -64,7 +64,7 @@ def main():
                 elif in_char.isdigit() and operation_array[-1].isdigit() and first_operand_added == True:
                     operation_array.append(in_char)
                     continue
-                elif in_char == ',' and operation_array[-1].isdigit() and first_operand_added == True:
+                elif in_char == ',' and operation_array[-1].isdigit() and first_operand_added == True and second_operand_added == False:
                     operation_array.append(in_char)
                     first_operand_added == False
                     continue
@@ -78,8 +78,11 @@ def main():
                 elif in_char == ')' and operation_array[-1].isdigit() and second_operand_added == True:
                     operation_array.append(in_char)
                     #call a function here to process the operation_array and add the result to 
-                    result_sum += processCompletedArray(operation_array)
-                    operation_array == []
+                    x = processCompletedArray(operation_array)
+                    print(x)
+                    result_sum += x
+                    operation_array = []
+                    second_operand_added = False
                     continue   
             else:
                 operation_array = []
